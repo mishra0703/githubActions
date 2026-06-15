@@ -20,5 +20,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: version of nodejs and python
-        run: node -v && npx python --version
+        run: node -v && python --version
   
