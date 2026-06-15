@@ -16,5 +16,9 @@ jobs:
         run: echo "Hello $USER"
       - name: say hello to users
         run: echo "Hello users"
-
+  version-details:
+    runs-on: ubuntu-latest
+    steps:
+      - name: version of nodejs and python
+        run: node -v && npx python --version
   
