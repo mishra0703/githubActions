@@ -1,0 +1,22 @@
+name: CICD - Taking Inputs During manual trigger
+
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Choose one of them
+        type: choice
+        default: dev
+        required: true
+        options:
+          - dev
+          - prod
+          - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploying...
+        run: echo "Your app is deploying..."
+        
