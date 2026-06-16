@@ -2,7 +2,7 @@ name: CICD
 
 on:
   workflow_dispatch:
-
+# Every job needs separate runners , it's called parallelism
 jobs:
   code:
     runs-on: ubuntu-latest
@@ -10,16 +10,19 @@ jobs:
       - name: Checkout Code
         run: echo "This is my Code"
   build:
+    needs: [code]
     runs-on: ubuntu-latest
     steps:
       - name: Building the app
         run: echo "Build Started"
   test:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Testing the app
         run: echo "App testing has been initiated"
   deploy:
+    needs: [build,test]
     runs-on: ubuntu-latest
     steps:
       - name: App Deployment has been started
