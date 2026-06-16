@@ -14,9 +14,28 @@ on:
           - staging
 
 jobs:
-  deploy:
+  code:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploying...
-        run: echo "Your app is deploying..."
+      - name: Checkout Code
+        run: echo "This is my Code"
+  build:
+    needs: [code]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Building the app
+        run: echo "Build Started"
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing the app
+        run: echo "App testing has been initiated"
+  deploy:
+    if: inputs.environment == 'dev'
+    needs: [build,test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: App Deployment has been started
+        run: echo "App has been deployed "
         
