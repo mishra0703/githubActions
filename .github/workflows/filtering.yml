@@ -1,0 +1,15 @@
+name: CICD Filtering concurrency
+
+on:
+  push:
+    branches: [main]
+    paths: 
+      - '**.html'
+
+jobs:
+  pushed-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: New HTML FILE PUSHED
+        run: echo "An HTML file is either pushed/updated"
+        
