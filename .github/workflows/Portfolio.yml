@@ -7,7 +7,7 @@ on:
         
 permissions:
     # Deployment needs some basic permissions
-    pages: read
+    pages: write
     id-token: write
 
 
