@@ -1,0 +1,45 @@
+name: Portfolio
+
+on:
+    push:
+        branches: [main]
+        
+permissions:
+    # Deployment needs some basic permissions
+    pages: read
+    id-token: write
+
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        # Will give the url of the app
+        environment:
+            name: github-pages
+            url: ${{steps.deployment.outputs.page_url}}
+
+        steps:
+            # By usign Checkout action , we are giving access to our Portfolio Code workflows
+            # Or we can say , clones or checks out the code where this workflow is written
+            # STEP 1
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            # setup GitHub Pages
+            #STEP 2
+            - name: Setup GitHub Pages
+              uses: actions/configure-pages@v4
+
+            # Statis Code Artifacts
+            #STEP 3
+            - name: Upload Static Files
+              uses: actions/upload-pages-artifact@v4
+              
+            # Deploy to GitHub Pages
+            #STEP 4
+            - name: Deploy to GitHub Pages
+              uses: actions/deploy-pages@v4
+            
+
+            
