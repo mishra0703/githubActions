@@ -1,4 +1,4 @@
-name: CICD Filtering concurrency
+name: CICD Filtering 
 
 on:
   push:
