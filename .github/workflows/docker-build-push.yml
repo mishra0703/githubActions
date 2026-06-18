@@ -23,4 +23,12 @@ jobs:
               with:
                 context: .
                 push: true
-                tags: ${{ vars.DOCKERHUB_USERNAME }}/python-app:latest
+                tags: |
+                   ${{ vars.DOCKERHUB_USERNAME }}/python-app:${{ github.ref_name }}  
+                   ${{ vars.DOCKERHUB_USERNAME }}/python-app:latest
+                   ${{ vars.DOCKERHUB_USERNAME }}/python-app:${{ github.sha }}
+
+
+# github.ref_name is the branch or tag name that triggered the workflow. For example, if the workflow is triggered by a push to the main branch, github.ref_name will be "main". If it's triggered by a tag, it will be the tag name.
+
+# github.sha is the commit SHA that triggered the workflow. This is a unique identifier for the specific commit that caused the workflow to run.
