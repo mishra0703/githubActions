@@ -1,4 +1,6 @@
 services:
 
   web: 
-    image: ${}/python-app:${}
+    image: ${DOCKER_USER}/python-app:${DOCKER_TAG}
+    ports:
+      - "80:80"
