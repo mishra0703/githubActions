@@ -1,0 +1,27 @@
+name: Deploy App
+
+on:
+    workflow_dispatch: 
+
+jobs:
+    deploy:
+        env:
+            DOCKER_USER: ${{ vars.DOCKER_USERNAME }}
+            DOCKER_TAG: ${{ github.sha }}
+
+        runs-on: self-hosted
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup docker & docker compose
+              run: |                
+                sudo apt-get update
+                sudo apt-get install -y docker.io
+                sudo apt-get install -y docker-composev2
+
+            - name: Docker compose setup
+              uses: docker/setup-compose-action@v2
+            
+            - name: Deploy with docker compose
+              run: docker compose down && docker compose up -d --force-recreate --build
