@@ -41,7 +41,7 @@ jobs:
                 key: ${{ secrets.EC2_SSH_KEY }}
                 script: |
                   echo "Installing required packages and folders"
-                  sudo apt-get update && sudo apt install docker.io docker-compose-v2
+                  sudo apt-get update && sudo apt install docker.io docker-compose-v2 -y
                   sudo usermod -aG docker $USER && newgrp docker
                   echo "Running App"
                   echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username ${{ vars.DOCKERHUB_USERNAME }} --password-stdin
