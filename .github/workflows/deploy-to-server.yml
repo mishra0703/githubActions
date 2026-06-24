@@ -6,17 +6,42 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        env:
+          DOCKER_USER: ${{ vars.DOCKERHUB_USERNAME }}
+          DOCKER_TAG: ${{ github.sha }}
+  
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
               
-            - name: Execute Remote SSH Commands
+            - name: SSH to Prod Server and create app folder
               uses: appleboy/ssh-action@v1.0.3
               with:
                 host: ${{ secrets.EC2_HOST }}
                 username: ${{ secrets.EC2_USERNAME }}
                 key: ${{ secrets.EC2_SSH_KEY }}
-                port: 22    
                 script: |
-                    echo "Starting Deployment"
-                    mkdir devops_project
+                    echo "Installing required packages and folders"
+                    sudo apt-get update && sudo apt-get install docker.io docker-compose-v2
+                    sudo usermod -aG docker $USER && newgrp
+                    mkdir -p devops_project
+
+            - name: Copy the Docker Compose file       
+              uses: appleboy/scp-action@v1
+              with:
+                host: ${{ secrets.EC2_HOST }}
+                username: ${{ secrets.EC2_USERNAME }}
+                key: ${{ secrets.EC2_SSH_KEY }}
+                source: docker-compose.yml
+                target: ~/devops_project
+
+            - name: SSH to Prod server again and Run the app
+              uses: appleboy/ssh-action@v1.0.3    
+              with:
+                host: ${{ secrets.EC2_HOST }}
+                username: ${{ secrets.EC2_USERNAME }}
+                key: ${{ secrets.EC2_SSH_KEY }}
+                script: |
+                  echo "Running App"
+                  echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username ${{ vars.DOCKERHUB_USERNAME }} --password-stdin
+                  cd ~/devops_project && docker compose down && docker compose up -d --build --force-recreate --pull always
