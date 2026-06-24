@@ -1,0 +1,22 @@
+name: Deploy to Server
+
+on: 
+    workflow_call:
+        
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+              
+            - name: Execute Remote SSH Commands
+              uses: appleboy/ssh-action@v1.0.3
+              with:
+                host: ${{ secrets.EC2_HOST }}
+                username: ${{ secrets.EC2_USERNAME }}
+                key: ${{ secrets.EC2_SSH_KEY }}
+                port: 80    
+                script: |
+                    echo "Starting Deployment"
+                    mkdir devops_project
