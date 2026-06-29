@@ -13,3 +13,16 @@ jobs:
 
       - name: Print Message 
         run: echo "Hello from GitHub Actions"
+
+      - name: Get current date
+        run: echo "$(date +'%Y-%m-%d_%H-%M-%S')"
+
+      - name: Print branch name
+        run: echo "The branch is $GITHUB_REF_NAME"
+  
+      - name: List Files in repo
+        run: git ls-files
+
+      - name: Print OS via Context
+        run: echo "The runner OS context is ${{ runner.os }}"
+
