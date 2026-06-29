@@ -27,4 +27,4 @@ jobs:
         run: echo "The runner OS context is ${{ runner.os }}"
 
       - name: On purpose error 
-        run: dcoker --version
+        run: docker --version
