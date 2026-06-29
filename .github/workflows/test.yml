@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checking PR
-        run: echo "PR check running for branch - $GITHUB_REF_NAME"
+        run: echo "PR check running for branch - $GITHUB_BASE_REF"
