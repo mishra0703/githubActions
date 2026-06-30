@@ -2,7 +2,7 @@ name: Schedule Trigger
 
 on:
   schedule:
-    - cron: '*/5 * * * *' 
+    - cron: '25 13 * * *' 
 
 jobs:
   Schedule:
@@ -10,3 +10,10 @@ jobs:
     steps:
       - name: Checking Scheduled Trigger
         run: echo "This workflow at runs every 5 minutes"
+
+      - name: Display and Verify IST Date
+        env:
+          TZ: "Asia/Kolkata"
+        run: |
+          echo "The current time in IST is: $(date)"
+          echo "The explicit date is: $(date +'%Y-%m-%d')"
