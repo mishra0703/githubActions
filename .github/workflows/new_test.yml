@@ -16,11 +16,16 @@ jobs:
               - python-version: "3.10"
                 os: windows-latest
         steps:
-            - name: Installing Python ${{matrix.python-version}}              
-              run: |           
-                sudo add-apt-repository ppa:deadsnakes/ppa -y 
+            - name: Installing Python (Ubuntu)
+              if: matrix.os == 'ubuntu-latest'
+              run: |
+                sudo add-apt-repository ppa:deadsnakes/ppa -y
                 sudo apt-get update
-                sudo apt-get install python${{matrix.python-version}} -y            
+                sudo apt-get install python${{ matrix.python-version }} -y
+
+            - name: Installing Python (Windows)
+              if: matrix.os == 'windows-latest'
+              run: choco install python --version=${{ matrix.python-version }} -y                                 
 
             - name: Verify Installation
               run: python${{ matrix.python-version }} -V
