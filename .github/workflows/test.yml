@@ -2,7 +2,7 @@ name: Schedule Trigger
 
 on:
   schedule:
-    - cron: '25 13 * * *' 
+    - cron: '27 13 * * *' 
 
 jobs:
   Schedule:
