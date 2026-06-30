@@ -1,15 +1,13 @@
 name: PR Check
 
 on:
-  pull_request:
-    types: [opened, edited]
-    branches:
-      - main
-
+  schedule:
+    - cron: '5 * * * *'
+  workflow_dispatch: 
 
 jobs:
-  pr_check:
+  Schedule:
     runs-on: ubuntu-latest
     steps:
-      - name: Checking PR
-        run: echo "PR check running for branch - $GITHUB_BASE_REF"
+      - name: Checking Scheduled Trigger
+        run: echo "This workflow at runs every 5 minutes past the hour"
