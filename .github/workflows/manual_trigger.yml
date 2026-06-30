@@ -1,0 +1,20 @@
+name: Manual Trigger
+
+on:
+    workflow_dispatch:
+      inputs:
+        environment:
+            description: Choose one
+            type: choice
+            required: true
+            default: stagging
+            options:
+              - stagging
+              - production
+
+jobs:
+    Manual_Trigger:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Environment Name
+              run: echo "Environment name is ${{ inputs.environment }} "
