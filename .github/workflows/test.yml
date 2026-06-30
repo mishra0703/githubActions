@@ -2,7 +2,7 @@ name: Schedule Trigger
 
 on:
   schedule:
-    - cron: '5 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch: 
 
 jobs:
@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checking Scheduled Trigger
-        run: echo "This workflow at runs every 5 minutes past the hour"
+        run: echo "This workflow at runs every 5 minutes"
