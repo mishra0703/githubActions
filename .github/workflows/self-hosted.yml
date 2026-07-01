@@ -6,7 +6,7 @@
 
   jobs:
       Self_Hosted_Runner:
-          runs-on: self-hosted
+          runs-on: [self-hosted, my-tester]
           steps:
               - name: Testing Self-Hosted Runner            
                 run: |
