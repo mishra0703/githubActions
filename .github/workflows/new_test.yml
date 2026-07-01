@@ -1,38 +1,21 @@
-name: Matrix Revision 
+name: Github Hosted Runners 
 
 on:
     push: 
       branches: [main]
 
 jobs:
-    Python_Installation:
-        runs-on: ${{ matrix.os }}
+    Runner_Test:
+        name: Job is runnning on ${{ matrix.os }}     
         strategy:
-          fail-fast: true
           matrix: 
-            os: [ubuntu-latest , windows-latest]
-            python-version: ["3.10","3.11","3.12"]
-            exclude:
-              - python-version: "3.10"
-                os: windows-latest
+            os: [ubuntu-latest , macos-latest , windows-latest]
+        runs-on: ${{ matrix.os }}
         steps:
-            - name: Installing Python (Ubuntu)
-              if: matrix.os == 'ubuntu-latest'
+            - name: On ${{ matrix.os }}            
               run: |
-                sudo add-apt-repository ppa:deadsnakes/ppa -y
-                sudo apt-get update
-                sudo apt-get install python${{ matrix.python-version }} -y
+                echo "The operating system is ${{ runner.os }}"
+                echo "The host's system hostname is: $(hostname)"
+                echo "The registered GitHub runner name is: $RUNNER_NAME"
+                echo "The user running this job is ${{ github.actor }}"
 
-            - name: Installing Python (Windows)
-              if: matrix.os == 'windows-latest'
-              uses: actions/setup-python@v5
-              with:
-                python-version: ${{ matrix.python-version }}
-                
-            - name: Verify Installation on Ubuntu
-              if: matrix.os == 'ubuntu-latest'                            
-              run: python${{ matrix.python-version }} -V
-            
-            - name: Verify Installation on Windows  
-              if: matrix.os == 'windows-latest'              
-              run: python --version
