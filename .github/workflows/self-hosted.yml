@@ -12,7 +12,7 @@
                 run: |
                   echo "The host's system hostname is : $(hostname)"
                   echo "My Working Directory name is : $GITHUB_WORKSPACE"
-                  mkdir /home/$USER/my-test-folder
+                  mkdir -p /home/$USER/my-test-folder
                   touch /home/$USER/my-test-folder/hello_from_github.txt
-                  echo "Hello this message is printing from github actions" > /home/$USER/my-test-folder/hello_from_github.txt
+                  echo "Hello this message is printing from github actions" >> /home/$USER/my-test-folder/hello_from_github.txt
 
