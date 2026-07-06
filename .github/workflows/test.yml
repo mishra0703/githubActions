@@ -1,7 +1,8 @@
 name: Multi-Job 
 
 on:
-  push:
+  # push:
+    workflow_dispatch: 
 
 jobs:
   build:
