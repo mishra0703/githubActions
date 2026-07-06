@@ -12,7 +12,7 @@ jobs:
     steps:      
       - name: OutPut
         id: job_id
-        run: echo "Result=This sentence is printing from job1"
+        run: echo "Result=This sentence is printing from job1" >> "$GITHUB_OUTPUT"
 
   Job2:
     runs-on: ubuntu-latest
