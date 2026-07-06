@@ -8,11 +8,11 @@ jobs:
   Job1:
     runs-on: ubuntu-latest
     outputs:
-      job1_output: ${{ steps.job_id.outputs }}
+      job1_output: ${{ steps.job_id.outputs.Result }}
     steps:      
       - name: OutPut
         id: job_id
-        run: echo "This sentence is printing from job1"
+        run: echo "Result=This sentence is printing from job1"
 
   Job2:
     runs-on: ubuntu-latest
