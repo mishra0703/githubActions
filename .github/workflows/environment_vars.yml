@@ -1,7 +1,9 @@
 name: Env Vars 
 
 on:
-  push:
+#   push:
+    workflow_dispatch:
+      
 
 env:
     APP_NAME: myapp
