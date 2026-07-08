@@ -1,7 +1,8 @@
 name: Conditionals
 
 on:
-    push:
+    # push:
+    workflow_dispatch: 
 
 jobs:
     Conditional_jobs:
@@ -24,7 +25,7 @@ jobs:
               if: steps.failed_step.outcome == 'failure'
               run: echo "The Step failed, but the workflow is carrying on!"
             
-            - name: Intentionally failed
+            - name: Intentionally failed 2
               id: failed_step_2
               run: exit 1
 
