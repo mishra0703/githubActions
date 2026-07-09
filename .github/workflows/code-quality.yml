@@ -30,9 +30,7 @@ jobs:
               with:
                 path: ~/.cache/pip          
                 # key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}     
-                key: ${{ runner.os }}-py${{ matrix.python-version }}-pip-${{ hashFiles('**/requirements.txt') }}
-                restore-keys: |
-                  ${{ runner.os }}-pip-
+                key: ${{ runner.os }}-py${{ matrix.python-version }}-pip-${{ hashFiles('**/requirements.txt') }}                
 
             - name: Show Cache Status
               run: echo "Cache hit = ${{ steps.cache-pip.outputs.cache-hit }}"                    
