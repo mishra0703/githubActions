@@ -25,10 +25,17 @@ jobs:
                 python-version: ${{matrix.python-version}}
             
             - name: Cache Pip Packages
+              id: cache-pip
               uses: actions/cache@v4        
               with:
                 path: ~/.cache/pip          
-                key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}     
+                # key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}     
+                key: ${{ runner.os }}-py${{ matrix.python-version }}-pip-${{ hashFiles('**/requirements.txt') }}
+                restore-keys: |
+                  ${{ runner.os }}-pip-
+
+            - name: Show Cache Status
+              run: echo "Cache hit = ${{ steps.cache-pip.outputs.cache-hit }}"                    
 
             - name: Install Dependencies
               run: pip install -r requirements.txt
