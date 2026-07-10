@@ -37,4 +37,4 @@ jobs:
                 push: ${{ github.ref == 'refs/heads/main' }}
                 tags: |
                     ${{ vars.DOCKERHUB_USERNAME }}/python-app:latest
-                    ${{ vars.DOCKERHUB_USERNAME }}/python-app:${{ github.sha }}
+                    ${{ vars.DOCKERHUB_USERNAME }}/python-app:sha-${{ steps.vars.outputs.sha_short }}
