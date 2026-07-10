@@ -32,5 +32,5 @@ jobs:
                 push: true
                 # tags: ${{ steps.docker_metadata.outputs.tags }}
                 tags: |
-                    ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
-                    ${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ github.sha }}
+                    ${{ vars.DOCKERHUB_USERNAME }}/python-app:latest
+                    ${{ vars.DOCKERHUB_USERNAME }}/python-app:${{ github.sha }}
