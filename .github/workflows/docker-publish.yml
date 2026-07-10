@@ -12,25 +12,30 @@ jobs:
             - name: Code Checkout
               uses: actions/checkout@v4        
 
+
+            - name: Build Docker Image
+              uses: docker/build-push-action@v6
+              with:
+                context: .
+                file: ./Dockerfile
+                push: false
+                tags: ${{ vars.DOCKERHUB_USERNAME }}/python-app:latest
+                                  
+
             - name: Log in to Docker Hub
               uses: docker/login-action@v3
               with:
                 username: ${{ vars.DOCKERHUB_USERNAME }}
                 password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            # - name: Extract Docker metadata
-            #   id: docker_metadata
-            #   uses: docker/metadata-action@v5
-            #   with:
-            #     images: ${{ vars.DOCKERHUB_USERNAME }}/githubActions
-
-            - name: Build and push Docker image
+            
+            - name: Push Docker Image
+              if: github.ref == 'refs/heads/main'
               uses: docker/build-push-action@v6
               with:
                 context: .
                 file: ./Dockerfile
                 push: true
-                # tags: ${{ steps.docker_metadata.outputs.tags }}
                 tags: |
                     ${{ vars.DOCKERHUB_USERNAME }}/python-app:latest
                     ${{ vars.DOCKERHUB_USERNAME }}/python-app:${{ github.sha }}
