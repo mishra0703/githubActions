@@ -13,3 +13,11 @@ jobs:
          environment: "production"
        secrets:
          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
+    Print_Version:
+        needs: Calling_Workflow
+        runs-on: ubuntu-latest
+        steps:
+          - name: Print Build Version
+            run: echo "Build version is ${{ needs.Calling_Workflow.outputs.build_version }}"
