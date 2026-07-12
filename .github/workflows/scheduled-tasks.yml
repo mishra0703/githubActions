@@ -16,7 +16,7 @@ jobs:
 
             - name: Health Check
               run: |
-                URL="https://api.github.com"
+                URL="https://api.github.com/this-does-not-exist"
                 
                 STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
                 echo "Response code: $STATUS_CODE"
