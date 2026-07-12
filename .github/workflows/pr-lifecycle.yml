@@ -26,4 +26,7 @@ jobs:
               run: |
                 echo "Source Branch (working branch) name is ${{ github.head_ref }}"
                 echo "Target Branch (destination branch) name is ${{ github.base_ref }}"
-        
+
+            - name: Merged Only Step
+              if: github.event.action == 'closed' && github.event.pull_request.merged == true
+              run: echo "PR was merged into ${{ github.base_ref }}!"                
