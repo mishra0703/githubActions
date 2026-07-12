@@ -9,6 +9,9 @@ jobs:
     greeting:
         runs-on: ubuntu-latest        
         steps:
+            - name: Code Checkout
+              uses: actions/checkout@v4
+
             - name: Run Greet Action
               id: greet-action
               uses: ./.github/actions/setup-and-greet
