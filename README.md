@@ -10,4 +10,4 @@ Because in smart-triggers.yml it says it will only trigger on change on src/ app
 And in smart-triggers_2.yml it says to ignore .md files 
 So by pushing me nothing will happen
 
-Let's try 
+Let's try again
