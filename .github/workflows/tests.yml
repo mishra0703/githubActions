@@ -1,0 +1,14 @@
+name: Testing
+
+on:
+    push:
+        branches: [main]
+
+
+
+jobs:
+    Test:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Running a test
+              run: echo "Testing the app"
