@@ -10,7 +10,7 @@ jobs:
     Deploy:
         runs-on: ubuntu-latest
         steps:
-            - name: Deploying
+            - name: Warning
               if: ${{ github.event.workflow_run.conclusion != 'success' }}
               run: |
                 echo "Warning !!! Warning !!! Warning !!! Warning !!!"
@@ -18,6 +18,6 @@ jobs:
                 echo "Skipping deployment."
                 exit 1
 
-            - name: Deploy
+            - name: Deploying
               if: ${{ github.event.workflow_run.conclusion == 'success' }}
               run: echo "Tests passed — deploying now..."
