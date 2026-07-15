@@ -6,6 +6,12 @@ name: Dependencies Scan
 on:
     workflow_call: 
 
+# By default, GitHub Actions gives our GITHUB_TOKEN (the auto-generated token each workflow run gets) read AND write access to almost everything in the repo — contents, issues, PRs, packages, etc. That's way more than most workflows actually need.
+# The permissions: block let us override this and grant only what's necessary — this is the principle of least privilege applied to CI/CD.
+permissions:
+  contents: read
+
+
 jobs:
     Dependency_Scan:
         runs-on: ubuntu-latest
